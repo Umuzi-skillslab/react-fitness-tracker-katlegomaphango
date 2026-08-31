@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { AppBar, Box, Container, IconButton, Toolbar, Typography, Menu, MenuItem } from '@mui/material'
+import { AppBar, Box, Container, IconButton, Toolbar, Typography, Menu, MenuItem, Button } from '@mui/material'
 import { useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu'
 
@@ -21,7 +21,9 @@ function Navbar() {
             <AppBar position='fixed'>
               <Container maxWidth="xl">
                 {/* <AdbIcon /> */}
-                <Toolbar>
+                <Toolbar
+                  sx={{ display: 'flex', justifyContent: 'space-between'}}
+                >
                   <Typography
                     variant='h6'
                     noWrap
@@ -58,30 +60,54 @@ function Navbar() {
                       onClose={handleCloseNavMenu}
                       sx={{ display: { xs: 'block', md: 'none' }}}
                     >
-                      <MenuItem key={'home'} onClick={handleCloseNavMenu}>
+                      <MenuItem key={'home'} onClick={handleCloseNavMenu} component={Link} to="/">
                         <Typography sx={{ textAlign: 'center'}}>Home</Typography>
                       </MenuItem>
-                      <MenuItem key={'exercises'} onClick={handleCloseNavMenu}>
+                      <MenuItem key={'exercises'} onClick={handleCloseNavMenu} component={Link} to="/exercises">
                         <Typography sx={{ textAlign: 'center'}}>Exercises</Typography>
                       </MenuItem>
-                      <MenuItem key={'workout-planner'} onClick={handleCloseNavMenu}>
+                      <MenuItem key={'workout-planner'} onClick={handleCloseNavMenu} component={Link} to="/workout-planner">
                         <Typography sx={{ textAlign: 'center'}}>Workout Planner</Typography>
                       </MenuItem>
-                      <MenuItem key={'history'} onClick={handleCloseNavMenu}>
+                      <MenuItem key={'history'} onClick={handleCloseNavMenu} component={Link} to="/history">
                         <Typography sx={{ textAlign: 'center'}}>History</Typography>
                       </MenuItem>
-                      <MenuItem key={'progress'} onClick={handleCloseNavMenu}>
+                      <MenuItem key={'progress'} onClick={handleCloseNavMenu} component={Link} to="/progress">
                         <Typography sx={{ textAlign: 'center'}}>Progress</Typography>
                       </MenuItem>
                     </Menu>
                   </Box>
-                  <nav>
+
+                  <Typography
+                    variant="h5"
+                    noWrap
+                    component="a"
+                    sx={{
+                      mr: 2,
+                      display: { xs: 'flex', md: 'none' },
+                      flexGrow: 1,
+                      fontWeight: 700,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Fit Tipper
+                  </Typography>
+
+                  <Box sx={{ display: { xs: 'none', md: 'flex' }}}>
+                    <Button component={Link} to="/" sx={{ my: 2, color: 'white', display: 'block'}} onClick={handleCloseNavMenu} key={'home'}>Home</Button>
+                    <Button component={Link} to="/exercises" sx={{ my: 2, color: 'white', display: 'block'}} onClick={handleCloseNavMenu} key={'exercises'}>Exercises</Button>
+                    <Button component={Link} to="/workout-planner" sx={{ my: 2, color: 'white', display: 'block'}} onClick={handleCloseNavMenu} key={'workout-planner'}>Workout Planner</Button>
+                    <Button component={Link} to="/history" sx={{ my: 2, color: 'white', display: 'block'}} onClick={handleCloseNavMenu} key={'history'}>History</Button>
+                    <Button component={Link} to="/progress" sx={{ my: 2, color: 'white', display: 'block'}} onClick={handleCloseNavMenu} key={'progress'}>Progress</Button>
+                  </Box>
+
+                  {/* <nav>
                       <Link to="/">Home</Link>
                       <Link to="/exercises">Exercises</Link>
                       <Link to="/workout-planner">Workout Planner</Link>
                       <Link to="/history">History</Link>
                       <Link to="/progress">Progress</Link>
-                  </nav>
+                  </nav> */}
                 </Toolbar>
               </Container>
             </AppBar>
