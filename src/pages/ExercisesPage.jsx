@@ -1,32 +1,37 @@
+import { 
+    Typography, 
+    TextField
+} from '@mui/material'
+
 function ExercisesPage() {
     return (
         <>
-            <div>Exercise Page
+            <div className="exercise-page">
+                <div className="exercise-page_container">
+                    <Typography variant="h2" sx={{ fontWeight: 'bold', fontSize: '2rem' }}>
+                        Exercises
+                    </Typography>
 
-                <div>Exercise Page</div>
-                <div>Exercise Page</div>
-                <div>Exercise Page</div>
-                <div>Exercise Page</div>
-                <div>Exercise Page</div>
-                <div>Exercise Page</div>
-                <div>Exercise Page</div>
+                    <TextField
+                        label="Search exercises..."
+                        type="text"
+                        sx={{ margin: '1rem 0'}}
+                        fullWidth
+                    />
+
+                    <div>
+                        
+                    </div>
+                    <div>Exercise Page</div>
+                    <div>Exercise Page</div>
+                    <div>Exercise Page</div>
+                    <div>Exercise Page</div>
+                    <div>Exercise Page</div>
+                    <div>Exercise Page</div>
+                </div>
             </div>
         </>
     )
 }
 
 export default ExercisesPage
-
-
-
-// function Home() {
-//     return (
-//         <>
-//             <div>
-//                 HomeLayout
-//             </div>
-//         </>
-//     )
-// }
-
-// export default Home
