@@ -1,6 +1,10 @@
 import { 
     Typography, 
-    TextField
+    TextField,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem
 } from '@mui/material'
 
 function ExercisesPage() {
@@ -20,7 +24,59 @@ function ExercisesPage() {
                     />
 
                     <div>
-                        
+                        <FormControl variant="outlined" sx={{ m: 1, minWidth: 180 }}>
+                            <InputLabel id="all-categories">All Categories</InputLabel>
+                            <Select
+                            labelId="all-categories"
+                            id="all-categories-outlined"
+                            value={''}
+                            // onChange={handleChange}
+                            label="All Categories"
+                            >
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <FormControl variant="outlined" sx={{ m: 1, minWidth: 180 }}>
+                            <InputLabel id="all-muscle">All Muscle Group</InputLabel>
+                            <Select
+                            labelId="all-muscle"
+                            id="all-muscle-outlined"
+                            value={''}
+                            // onChange={handleChange}
+                            label="All Muscle Groups"
+                            >
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <FormControl variant="outlined" sx={{ m: 1, minWidth: 180 }}>
+                            <InputLabel id="all-categories">All Difficulty</InputLabel>
+                            <Select
+                            labelId="all-difficulty"
+                            id="all-difficulty-outlined"
+                            value={''}
+                            // onChange={handleChange}
+                            label="All Difficulty"
+                            >
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                            </Select>
+                        </FormControl>
                     </div>
                     <div>Exercise Page</div>
                     <div>Exercise Page</div>
