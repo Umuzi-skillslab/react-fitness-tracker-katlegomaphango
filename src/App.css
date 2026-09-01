@@ -2,3 +2,13 @@
   margin: 0;
   padding: 0;
 }
+
+.exercise-page {
+  padding-top: 5rem;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.exercise-page_container {
+  
+}
