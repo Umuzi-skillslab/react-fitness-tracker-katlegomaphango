@@ -6,6 +6,8 @@ import {
     Select,
     MenuItem
 } from '@mui/material'
+import ExerciseList from '../components/Exercise/ExerciseList' 
+import { exercisesData } from '../data/exercisesData'
 
 function ExercisesPage() {
     return (
@@ -78,7 +80,16 @@ function ExercisesPage() {
                             </Select>
                         </FormControl>
                     </div>
-                    <div>Exercise Page</div>
+
+                    <div>
+                        <ExerciseList 
+                            exercises={exercisesData}
+                            // workoutPlan={workoutPlan}
+                            // onAddToWorkout={handleAddToWorkout}
+                            // onSelectExercise={handleSelectExercise}
+                        />
+                    </div>
+
                     <div>Exercise Page</div>
                     <div>Exercise Page</div>
                     <div>Exercise Page</div>
