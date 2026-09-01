@@ -4,14 +4,15 @@ import {
     CardContent,
     CardMedia,
     Button,
-    Typography
+    Typography,
+    Chip
 } from '@mui/material'
 
 function ExerciseCard({ exercise, isInPlan, onAdd, onSelect }) {
     console.log(exercise)
     return (
         <>
-            <Card sx={{ maxWidth: 300 }}>
+            <Card sx={{ maxWidth: 300, minWidth: 250, width: 250 }}>
                 <CardMedia
                     component="img"
                     alt={exercise.name}
@@ -22,8 +23,21 @@ function ExerciseCard({ exercise, isInPlan, onAdd, onSelect }) {
                     <Typography  gutterBottom variant="h5" component="div" >
                         {exercise.name}
                     </Typography>
+                    <Chip sx={{ margin: '0.2rem' }} color="secondary" label={exercise.difficulty} size="small" />
+                    <Typography>
+                        {exercise.muscleGroups.map(muscle => (
+                            <Chip label={muscle} sx={{ margin: '0.2rem' }} />
+                        ))}
+                    </Typography>
+                    {
+                        exercise.equipment !== 'none' 
+                        ? 
+                        <Typography>
+                            Equipment: {exercise.equipment}
+                        </Typography> 
+                        : ''
+                    }
                 </CardContent>
-                card
             </Card>
         </>
     )
