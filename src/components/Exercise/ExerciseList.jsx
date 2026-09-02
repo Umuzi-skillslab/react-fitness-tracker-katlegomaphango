@@ -1,39 +1,25 @@
-import ExerciseCard from './ExerciseCard'
-import { Grid } from '@mui/material'
+import ExerciseCard from './ExerciseCard';
+import { Grid } from '@mui/material';
 
-function ExerciseList ({ exercises, workoutPlan = [], onAddToWorkout, onSelectExercise }) {
-
+function ExerciseList({ exercises, workoutPlan = [], onAddToWorkout, onSelectExercise }) {
   return (
-    <Grid container spacing={2} sx={{ justifyContent: 'center' }} columns={3}>
-
-      {
-        exercises.map(exercise => (
-          <Grid key={exercise.id}>
-            <ExerciseCard 
-              key={exercise.id}
-              exercise={exercise}
-              isInPlan={workoutPlan.some(e => e.id === exercise.id)}
-              onAdd={onAddToWorkout}
-              onSelect={onSelectExercise}
-            />
-          </Grid>
-        ))
-      }
-
-      {/* <div className="exercise-list_container">
-        {exercises.map(exercise => (
-          <ExerciseCard 
-            key={exercise.id}
+    <Grid container spacing={3} sx={{ display: 'flex', justifyContent: 'center' }} xs={12} sm={6} md={4}>
+      {exercises.map((exercise) => (
+        <Grid
+          item
+          key={exercise.id}
+          sx={{ display: 'flex', justifyContent: 'center' }}
+        >
+          <ExerciseCard
             exercise={exercise}
-            isInPlan={workoutPlan.some(e => e.id === exercise.id)}
+            isInPlan={workoutPlan.some((e) => e.id === exercise.id)}
             onAdd={onAddToWorkout}
             onSelect={onSelectExercise}
           />
-        ))}
-      </div> */}
+        </Grid>
+      ))}
     </Grid>
   );
+}
 
-};
-
-export default ExerciseList
+export default ExerciseList;
