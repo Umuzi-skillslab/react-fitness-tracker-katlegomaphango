@@ -8,7 +8,7 @@ function ExerciseList ({ exercises, workoutPlan = [], onAddToWorkout, onSelectEx
 
       {
         exercises.map(exercise => (
-          <Grid>
+          <Grid key={exercise.id}>
             <ExerciseCard 
               key={exercise.id}
               exercise={exercise}
