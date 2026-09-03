@@ -5,6 +5,7 @@ import {
 } from "@mui/material"
 import StatCard from "../components/Home/StatCard"
 import TodayPlan from "../components/Home/TodayPlan"
+import RecentWorkouts from "../components/Home/RecentWorkouts"
 
 function Home() {
     return (
@@ -95,6 +96,8 @@ function Home() {
                         }}
                     >
                         <TodayPlan />
+
+                        <RecentWorkouts />
                     </Box>
                 </Container>
             </Box>
