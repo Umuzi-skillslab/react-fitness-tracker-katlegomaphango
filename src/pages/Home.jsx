@@ -4,6 +4,7 @@ import {
     Typography,
 } from "@mui/material"
 import StatCard from "../components/Home/StatCard"
+import TodayPlan from "../components/Home/TodayPlan"
 
 function Home() {
     return (
@@ -80,6 +81,20 @@ function Home() {
                             icon="calories"
                             color="#f97316"
                         />
+                    </Box>
+
+                    <Box
+                        sx={{
+                            display: "grid",
+                            gridTemplateColumns: {
+                            xs: "1fr",
+                            lg: "1.4fr 1fr",
+                            },
+                            gap: 3,
+                            mb: 4,
+                        }}
+                    >
+                        <TodayPlan />
                     </Box>
                 </Container>
             </Box>
