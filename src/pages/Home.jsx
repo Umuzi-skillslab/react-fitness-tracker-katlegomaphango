@@ -8,6 +8,7 @@ import TodayPlan from "../components/Home/TodayPlan"
 import RecentWorkouts from "../components/Home/RecentWorkouts"
 import QuickActions from "../components/Home/QuickActions"
 import MotivationCard from "../components/Home/MotivationCard"
+import WeeklyProgress from "../components/Home/WeeklyProgress"
 
 function Home() {
     return (
@@ -117,6 +118,8 @@ function Home() {
                         }}
                     >
                         <MotivationCard />
+
+                        <WeeklyProgress />
                     </Box>
                 </Container>
             </Box>
