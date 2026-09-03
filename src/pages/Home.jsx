@@ -7,6 +7,7 @@ import StatCard from "../components/Home/StatCard"
 import TodayPlan from "../components/Home/TodayPlan"
 import RecentWorkouts from "../components/Home/RecentWorkouts"
 import QuickActions from "../components/Home/QuickActions"
+import MotivationCard from "../components/Home/MotivationCard"
 
 function Home() {
     return (
@@ -103,6 +104,19 @@ function Home() {
 
                     <Box sx={{ mb: 4 }}>
                         <QuickActions />
+                    </Box>
+
+                    <Box
+                        sx={{
+                            display: "grid",
+                            gridTemplateColumns: {
+                            xs: "1fr",
+                            lg: "1.4fr 1fr",
+                            },
+                            gap: 3,
+                        }}
+                    >
+                        <MotivationCard />
                     </Box>
                 </Container>
             </Box>
