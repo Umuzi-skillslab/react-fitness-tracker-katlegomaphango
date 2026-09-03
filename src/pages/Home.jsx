@@ -6,6 +6,7 @@ import {
 import StatCard from "../components/Home/StatCard"
 import TodayPlan from "../components/Home/TodayPlan"
 import RecentWorkouts from "../components/Home/RecentWorkouts"
+import QuickActions from "../components/Home/QuickActions"
 
 function Home() {
     return (
@@ -98,6 +99,10 @@ function Home() {
                         <TodayPlan />
 
                         <RecentWorkouts />
+                    </Box>
+
+                    <Box sx={{ mb: 4 }}>
+                        <QuickActions />
                     </Box>
                 </Container>
             </Box>
