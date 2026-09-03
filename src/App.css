@@ -3,7 +3,8 @@
   padding: 0;
 }
 
-.exercise-page {
+.exercise-page,
+.home-page {
   padding-top: 5rem;
   width: 90%;
   margin: 0 auto;

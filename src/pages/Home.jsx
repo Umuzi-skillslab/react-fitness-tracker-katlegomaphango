@@ -1,9 +1,88 @@
+import {
+    Box,
+    Container,
+    Typography,
+} from "@mui/material"
+import StatCard from "../components/Home/StatCard"
+
 function Home() {
     return (
         <>
-            <div>
-                HomeLayout
-            </div>
+            <Box sx={{ minHeight: '100vh', backgroundColor: "#f6f8f7" }} className="home-page">
+                <Container
+                    sx={{
+                        py: {
+                            xs: 3,
+                        },
+                        px: {
+                            xs: 2,
+                            sm: 3,
+                            md: 4,
+                        },
+                    }}  
+                >
+                    <Box sx={{ mb: 4 }}>
+                        <Typography
+                            variant="h2"
+                            sx={{
+                            fontWeight: 'bold',
+                            fontSize: {
+                                xs: "1.7rem",
+                                md: "2rem",
+                                },
+                            }}
+                        >
+                            Dashboard
+                        </Typography>
+                    </Box>
+
+                    <Box
+                        sx={{
+                            display: "grid",
+                            gridTemplateColumns: {
+                            xs: "1fr",
+                            sm: "repeat(2, 1fr)",
+                            lg: "repeat(4, 1fr)",
+                            },
+                            gap: 2,
+                            mb: 4,
+                        }}  
+                    >
+                        <StatCard
+                            title="Workouts This Week"
+                            value="4"
+                            subtitle="of 6 completed"
+                            icon="workout"
+                            color="#16a34a"
+                            progress={67}
+                        />
+
+                        <StatCard
+                            title="Total Workouts"
+                            value="28"
+                            subtitle="All time"
+                            icon="fitness"
+                            color="#6366f1"
+                        />
+
+                        <StatCard
+                            title="Current Streak"
+                            value="7"
+                            subtitle="days"
+                            icon="streak"
+                            color="#2563eb"
+                        />
+
+                        <StatCard
+                            title="Calories Burned"
+                            value="2,450"
+                            subtitle="This week"
+                            icon="calories"
+                            color="#f97316"
+                        />
+                    </Box>
+                </Container>
+            </Box>
         </>
     )
 }
