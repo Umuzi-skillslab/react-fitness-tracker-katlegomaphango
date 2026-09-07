@@ -1,49 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+
 import {
   Box,
   Typography,
   Grid,
   Card,
   CardContent,
-  CircularProgress,
-} from "@mui/material";
+} from '@mui/material';
 
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
-import { getWorkoutPlan } from "../utils/workoutHelpers";
-
-const HISTORY_KEY = "workoutHistory";
-
-function getWorkoutHistory() {
-  try {
-    const savedHistory = localStorage.getItem(HISTORY_KEY);
-
-    if (!savedHistory) {
-      return [];
-    }
-
-    return JSON.parse(savedHistory);
-  } catch (error) {
-    console.error("Failed to load workout history:", error);
-
-    return [];
-  }
-}
+import { getWorkoutPlan } from '../utils/workoutHelpers';
+import { getWorkoutHistory } from '../utils/workoutHistory';
 
 function calculateWorkoutStreak(history) {
   if (!history || history.length === 0) {
     return 0;
   }
 
-  /*
-   * Get unique workout dates and sort newest first.
-   */
-  const dates = [...new Set(history.map((workout) => workout.date))].sort(
-    (a, b) => new Date(b) - new Date(a),
-  );
+  const dates = [
+    ...new Set(
+      history.map((workout) =>
+        new Date(workout.date).toDateString()
+      )
+    ),
+  ]
+    .map((date) => new Date(date))
+    .sort((a, b) => b - a);
 
   if (dates.length === 0) {
     return 0;
@@ -53,11 +39,11 @@ function calculateWorkoutStreak(history) {
   today.setHours(0, 0, 0, 0);
 
   const latestDate = new Date(dates[0]);
-
   latestDate.setHours(0, 0, 0, 0);
 
   const differenceInDays = Math.floor(
-    (today - latestDate) / (1000 * 60 * 60 * 24),
+    (today - latestDate) /
+    (1000 * 60 * 60 * 24)
   );
 
   if (differenceInDays > 1) {
@@ -68,13 +54,14 @@ function calculateWorkoutStreak(history) {
 
   for (let i = 0; i < dates.length - 1; i++) {
     const currentDate = new Date(dates[i]);
-
     const previousDate = new Date(dates[i + 1]);
 
     currentDate.setHours(0, 0, 0, 0);
     previousDate.setHours(0, 0, 0, 0);
 
-    const difference = (currentDate - previousDate) / (1000 * 60 * 60 * 24);
+    const difference =
+      (currentDate - previousDate) /
+      (1000 * 60 * 60 * 24);
 
     if (difference === 1) {
       streak++;
@@ -88,7 +75,6 @@ function calculateWorkoutStreak(history) {
 
 function ProgressPage() {
   const [workoutPlan, setWorkoutPlan] = useState({});
-
   const [workoutHistory, setWorkoutHistory] = useState([]);
 
   useEffect(() => {
@@ -96,44 +82,56 @@ function ProgressPage() {
     setWorkoutHistory(getWorkoutHistory());
   }, []);
 
-  const totalExercises = Object.values(workoutPlan).reduce(
-    (total, exercises) => total + exercises.length,
-    0,
+  const totalExercises = Object.values(
+    workoutPlan
+  ).reduce(
+    (total, exercises) =>
+      total + exercises.length,
+    0
   );
 
-  const totalCalories = Object.values(workoutPlan).reduce(
+  const totalCalories = Object.values(
+    workoutPlan
+  ).reduce(
     (total, exercises) =>
       total +
       exercises.reduce(
         (exerciseTotal, exercise) =>
-          exerciseTotal + (Number(exercise.caloriesBurn) || 0),
-        0,
+          exerciseTotal +
+          (Number(exercise.caloriesBurn) || 0),
+        0
       ),
-    0,
+    0
   );
 
-  const totalWorkoutsCompleted = workoutHistory.length;
+  const totalWorkoutsCompleted =
+    workoutHistory.length;
 
-  const workoutStreak = calculateWorkoutStreak(workoutHistory);
+  const workoutStreak =
+    calculateWorkoutStreak(workoutHistory);
 
   return (
     <Box
       sx={{
         maxWidth: 1200,
-        mx: "auto",
-        p: {
-          xs: 2,
-          md: 4,
-        },
+        mx: 'auto',
+        p: { xs: 2, md: 4 },
       }}
     >
       <Box sx={{ mb: 4 }}>
-        <Typography variant="h4" component="h1" fontWeight="bold">
+        <Typography
+          variant="h4"
+          component="h1"
+          fontWeight="bold"
+        >
           Progress
         </Typography>
 
-        <Typography color="text.secondary" sx={{ mt: 0.5 }}>
-          Track your workouts and progress
+        <Typography
+          color="text.secondary"
+          sx={{ mt: 0.5 }}
+        >
+          Track your workouts and progress.
         </Typography>
       </Box>
 
@@ -168,7 +166,11 @@ function ProgressPage() {
             title="Workout Streak"
             value={workoutStreak}
             icon={<EmojiEventsIcon />}
-            suffix={workoutStreak === 1 ? " day" : " days"}
+            suffix={
+              workoutStreak === 1
+                ? ' day'
+                : ' days'
+            }
           />
         </Grid>
       </Grid>
@@ -177,24 +179,33 @@ function ProgressPage() {
         elevation={0}
         sx={{
           mt: 4,
-          border: "1px solid",
-          borderColor: "divider",
+          border: '1px solid',
+          borderColor: 'divider',
           borderRadius: 3,
         }}
       >
         <CardContent sx={{ p: 3 }}>
-          <Typography variant="h6" fontWeight="bold" sx={{ mb: 1 }}>
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+            sx={{ mb: 1 }}
+          >
             Keep going!
           </Typography>
 
           {workoutStreak > 0 ? (
             <Typography color="text.secondary">
-              You're currently on a <strong>{workoutStreak}-day</strong> workout
-              streak. Keep training consistently!
+              You're currently on a{' '}
+              <strong>
+                {workoutStreak}-day
+              </strong>{' '}
+              workout streak. Keep training
+              consistently!
             </Typography>
           ) : (
             <Typography color="text.secondary">
-              Complete a workout today to start your workout streak.
+              Complete a workout today to start
+              your workout streak.
             </Typography>
           )}
         </CardContent>
@@ -203,46 +214,58 @@ function ProgressPage() {
   );
 }
 
-function ProgressCard({ title, value, icon, suffix = "" }) {
+function ProgressCard({
+  title,
+  value,
+  icon,
+  suffix = '',
+}) {
   return (
     <Card
       elevation={0}
       sx={{
-        height: "100%",
-        border: "1px solid",
-        borderColor: "divider",
+        height: '100%',
+        border: '1px solid',
+        borderColor: 'divider',
         borderRadius: 3,
       }}
     >
       <CardContent>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
             mb: 2,
           }}
         >
           <Box
             sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               width: 44,
               height: 44,
               borderRadius: 2,
-              backgroundColor: "action.hover",
+              backgroundColor: 'action.hover',
             }}
           >
             {icon}
           </Box>
         </Box>
 
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          color="text.secondary"
+        >
           {title}
         </Typography>
 
-        <Typography variant="h4" fontWeight="bold" sx={{ mt: 0.5 }}>
+        <Typography
+          variant="h4"
+          fontWeight="bold"
+          sx={{ mt: 0.5 }}
+        >
           {value}
           {suffix}
         </Typography>
