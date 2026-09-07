@@ -2,6 +2,7 @@ import './App.css'
 import Navbar from './components/Navigation/Navbar'
 import Home from './pages/Home'
 import ExercisesPage from './pages/ExercisesPage'
+import WorkoutPlannerPage from './pages/WorkoutPlannerPage'
 import { Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -15,9 +16,10 @@ function App() {
 
           <Route path="/" element={<Home />} />
           <Route path="/exercises" element={<ExercisesPage />} />
+          <Route path="/workout-planner" element={<WorkoutPlannerPage />} />
           {/* 
           <Route path="/exercises/:id" element={<ExerciseDetail />} />
-          <Route path="/workout-planner" element={<WorkoutPlannerPage />} />
+          
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/progress" element={<ProgressPage />} />
           <Route path="*" element={<NotFound />} /> */}
