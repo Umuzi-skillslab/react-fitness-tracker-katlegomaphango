@@ -1,10 +1,10 @@
 import { Box, Grid, Paper, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import DayCard from './DayCard'
-import { defaultWorkoutPlan, getWorkoutPlan, saveWorkoutPlan, } from '../../utils/workoutHelpers'
+import { removeExerciseFromWorkoutPlan, getWorkoutPlan, clearWorkoutDay } from '../../utils/workoutHelpers'
 
 
-const initialWorkoutPlan = {
+const defaultWorkoutPlan = {
     Monday: [],
     Tuesday: [],
     Wednesday: [],
@@ -18,47 +18,24 @@ function WorkoutPlanner() {
     const [workoutPlan, setWorkoutPlan] = useState(getWorkoutPlan)
 
     useEffect(() => {
-        saveWorkoutPlan(workoutPlan)
-    }, [workoutPlan])
+        setWorkoutPlan(getWorkoutPlan());
+    }, []);
 
     const totalExercises = Object.values(workoutPlan).reduce(
         (total, exercises) => total + exercises.length,
         0
     )
 
-    const clearDay = (day) => {
-        setWorkoutPlan((previousPlan) => ({
-            ...previousPlan,
-            [day]: [],
-        }))
+    const handleClearDay = (day) => {
+        const updatedPlan = clearWorkoutDay(day)
+
+        setWorkoutPlan(updatedPlan);
     }
 
-    const addExerciseToDay = (day, exercise) => {
-        setWorkoutPlan((previousPlan) => {
-            const alreadyExists = previousPlan[day].some(
-                (item) => item.id === exercise.id
-            )
+    const handleRemoveExercise = ( day, exerciseId) => {
+        const updatedPlan = removeExerciseFromWorkoutPlan(day, exerciseId)
 
-            if (alreadyExists) return previousPlan;
-
-            return {
-                ...previousPlan,
-                [day]: [
-                    ...previousPlan[day],
-                    exercise
-                ]
-            }
-        })
-    }
-
-    const removeExerciseFromDay = (day, exerciseId) => {
-        setWorkoutPlan((previousPlan) => ({
-            ...previousPlan,
-
-            [day]: previousPlan[day].filter(
-                (exercise) => exercise.id !== exerciseId
-            ),
-        }))
+        setWorkoutPlan(updatedPlan)
     }
 
     return (
@@ -90,13 +67,13 @@ function WorkoutPlanner() {
 
                 <Grid container spacing={3}>
                     {
-                        Object.keys(workoutPlan).map((day) => (
+                        Object.keys(defaultWorkoutPlan).map((day) => (
                             <Grid item xs={12} sm={6} md={4} key={day}>
                                 <DayCard 
                                     day={day}
-                                    exercises={workoutPlan[day]}
-                                    onRemoveExercise={removeExerciseFromDay}
-                                    onClearDay={clearDay}
+                                    exercises={workoutPlan[day] || []}
+                                    onRemoveExercise={handleRemoveExercise}
+                                    onClearDay={handleClearDay}
                                 />
                             </Grid>
                         ))
